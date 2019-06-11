@@ -1,0 +1,29 @@
+.detail {
+  font-family: $font;
+  max-width: 500px;
+  margin: 20px auto;
+
+  .close {
+    @include pos($t: 5px, $r: 10px);
+  }
+
+  .mat-chip {
+    margin-top: 15px !important;
+    padding: 3px 10px !important;
+    min-height: 0 !important;
+    height: auto !important;
+  }
+
+  .mat-card-content {
+    line-height: 1.5;
+    text-align: justify;
+    overflow: hidden;
+  }
+}
+
+.card-image {
+  background: #c3ccff;
+  width: 45%;
+  float: left;
+  margin: 20px 20px 10px !important;
+}

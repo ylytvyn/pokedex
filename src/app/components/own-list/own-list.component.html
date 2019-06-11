@@ -1,0 +1,7 @@
+<mat-list *ngIf="pokemons">
+  <h3 mat-subheader>My Catched Pokemons</h3>
+  <mat-list-item class="list__item"
+                 *ngFor="let pokemon of pokemons">
+    <p>{{pokemon.name}}</p>
+  </mat-list-item>
+</mat-list>

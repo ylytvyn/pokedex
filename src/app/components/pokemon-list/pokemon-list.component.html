@@ -1,0 +1,40 @@
+<div class="pokemon-wrap">
+  <div class="pokemon-list-bar">
+    <pokemon-detail [pokemon]="selectedPokemon"
+                    (onClose)="onClose()"
+                    (onCatch)="onCatch($event)">
+    </pokemon-detail>
+
+    <mat-list class="list">
+      <h3 mat-subheader>Pokemons</h3>
+
+      <mat-list-item class="list__item"
+                     *ngFor="let pokemon of pokemons"
+                     [class.selected]="pokemon.isSelected">
+        <div class="list__img">
+          <img src="{{pokemon.img}}" title="{{pokemon.name}}">
+
+          <div class="list__name">
+            <h4 mat-line>{{pokemon.name}}</h4>
+            <p mat-line> Total: {{pokemon.total}} </p>
+          </div>
+
+          <div class="list__abilities">
+            <p *ngFor="let ability of pokemon.abilities | keyvalue">
+              <span>{{ability.key}}:</span> {{ability.value}}
+            </p>
+          </div>
+        </div>
+
+        <button mat-stroked-button
+                class="list__btn"
+                color="primary"
+                (click)="showDetails(pokemon)">View More</button>
+      </mat-list-item>
+    </mat-list>
+  </div>
+
+  <div class="pokemon-own-list">
+    <own-list [pokemons]="catchedPokemons"></own-list>
+  </div>
+</div>

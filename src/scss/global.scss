@@ -1,0 +1,17 @@
+@import url('https://fonts.googleapis.com/css?family=Raleway:400,700&display=swap');
+@import 'https://fonts.googleapis.com/icon?family=Material+Icons';
+@import '~@angular/material/prebuilt-themes/indigo-pink.css';
+
+// Base
+@import "base/_variables";
+@import "base/_mixins";
+@import "base/_reset";
+
+// Layout
+@import "layout/_general";
+
+// Page styles
+@import "modules/_header";
+@import "modules/_list";
+@import "modules/_details";
+
