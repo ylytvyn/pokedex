@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { POKEMONS } from '../../mock-pokemons';
 import { IPokemon } from '../../model';
 import { MessagesService } from '../../services/messages.service';
+import { PokemonsService } from '../../services/pokemons.service';
 import { ModalType } from '../../model';
 
 @Component({
@@ -11,14 +11,16 @@ import { ModalType } from '../../model';
 })
 export class PokemonListComponent implements OnInit {
 
-  pokemons = POKEMONS;
+  pokemons: IPokemon[];
   selectedPokemon: IPokemon;
   catchedPokemons: IPokemon[] = [];
 
   constructor(private _snackBar: MatSnackBar,
-              private messagesService: MessagesService) { }
+              private messagesService: MessagesService,
+              private pokemonsService: PokemonsService) { }
 
   ngOnInit() {
+    this.pokemons = this.pokemonsService.getPokemonsList();
   }
 
   // Show Details on click
@@ -45,7 +47,7 @@ export class PokemonListComponent implements OnInit {
   onCatch(pokemon: IPokemon): void {
     let chanceToCatch = Math.floor(Math.random() * 101);
 
-    if (chanceToCatch >= 51) {
+    if (chanceToCatch >= 99) {
       this._snackBar.open('You catched pokemon!', 'X', {
         duration: 5000
       });
@@ -58,10 +60,9 @@ export class PokemonListComponent implements OnInit {
 
       this.selectedPokemon = null;
     } else {
+      let message = `Not today :(. Your chance to catch pokemon is ${chanceToCatch}%`;
 
-      this.messagesService.openModal('Hello world', ModalType.Info);
-
-      alert(`Not today :(. Your chance to catch pokemon is ${chanceToCatch}%`);
+      this.messagesService.openModal(message, ModalType.Info);
     }
   }
 

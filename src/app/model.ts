@@ -13,6 +13,7 @@ export interface IPokemon {
 export interface IModal {
   title: string;
   icon: string;
+  color: string;
   content: string;
   modalType: ModalType;
 }
