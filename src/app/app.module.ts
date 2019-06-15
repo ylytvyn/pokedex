@@ -9,6 +9,7 @@ import { PokemonListComponent } from './components/pokemon-list/pokemon-list.com
 import { PokemonDetailComponent } from './components/pokemon-detail/pokemon-detail.component';
 import { OwnListComponent } from './components/own-list/own-list.component';
 import { MessageComponent } from './components/message/message.component';
+import { OwnPokemonComponent } from './components/own-pokemon/own-pokemon.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { MessageComponent } from './components/message/message.component';
     PokemonListComponent,
     PokemonDetailComponent,
     OwnListComponent,
-    MessageComponent
+    MessageComponent,
+    OwnPokemonComponent
   ],
   imports: [
     BrowserModule,

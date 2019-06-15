@@ -47,7 +47,7 @@ export class PokemonListComponent implements OnInit {
   onCatch(pokemon: IPokemon): void {
     let chanceToCatch = Math.floor(Math.random() * 101);
 
-    if (chanceToCatch >= 99) {
+    if (chanceToCatch >= 50) {
       this._snackBar.open('You catched pokemon!', 'X', {
         duration: 5000
       });
@@ -62,7 +62,7 @@ export class PokemonListComponent implements OnInit {
     } else {
       let message = `Not today :(. Your chance to catch pokemon is ${chanceToCatch}%`;
 
-      this.messagesService.openModal(message, ModalType.Info);
+      this.messagesService.openModal(message, ModalType.Confirm, true);
     }
   }
 

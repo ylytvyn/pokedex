@@ -9,10 +9,17 @@ import { IPokemon } from '../model';
 export class PokemonsService {
 
   pokemons: IPokemon[] = POKEMONS;
+  backupListPokemon: IPokemon[] = [...POKEMONS];
 
   constructor() { }
 
   getPokemonsList(): IPokemon[] {
     return this.pokemons;
+  }
+
+  getPokemon(id: number): IPokemon {
+    let pokemon = this.backupListPokemon.find(item => item.id === id);
+
+    return pokemon;
   }
 }

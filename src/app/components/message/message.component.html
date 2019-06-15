@@ -15,6 +15,11 @@
   {{data.content}}
 </mat-dialog-content>
 
-<div mat-dialog-actions>
-
+<div mat-dialog-actions
+     *ngIf="data.modalType === modalType.Confirm">
+  <button mat-button
+          mat-dialog-close="true">
+        No Thanks
+  </button>
+  <button mat-button>OK</button>
 </div>

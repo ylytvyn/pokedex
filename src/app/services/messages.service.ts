@@ -51,7 +51,7 @@ export class MessagesService {
     }
   }
 
-  openModal(message: string, modalType?: ModalType) {
+  openModal(message: string, modalType?: ModalType, autoHide?: boolean) {
     const modalWindow = this.modal.open(MessageComponent, {
       width: '450px',
       data: {
@@ -62,5 +62,13 @@ export class MessagesService {
         modalType: modalType
       }
     });
+
+    if (autoHide) {
+      modalWindow.afterOpened().subscribe((res) => {
+        setTimeout(() => {
+          modalWindow.close();
+        }, 3000);
+      });
+    }
   }
 }
