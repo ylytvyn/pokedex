@@ -1,15 +1,22 @@
 <div class="pokemon-wrap">
   <div class="pokemon-list-bar">
-    <pokemon-detail [pokemon]="selectedPokemon"
-                    (onClose)="onClose()"
-                    (onCatch)="onCatch($event)">
-    </pokemon-detail>
-
     <mat-list class="list">
       <h3 mat-subheader>Pokemons</h3>
 
+      <div class="filters">
+        <mat-form-field>
+          <mat-label>Pokemon Type:</mat-label>
+          <mat-select (selectionChange)="filterPokemonsByType($event.value)">
+            <mat-option *ngFor="let type of pokemonTypes"
+                        [value]="type">
+              {{type}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
       <mat-list-item class="list__item"
-                     *ngFor="let pokemon of pokemons"
+                     *ngFor="let pokemon of filteredPokemons"
                      [class.selected]="pokemon.isSelected">
         <div class="list__img">
           <img src="{{pokemon.img}}" title="{{pokemon.name}}">
@@ -35,6 +42,10 @@
   </div>
 
   <div class="pokemon-own-list">
-    <own-list [pokemons]="catchedPokemons"></own-list>
+    <pokemon-detail [pokemon]="selectedPokemon"
+                    (onClose)="onClose()"
+                    (onCatch)="onCatch($event)">
+    </pokemon-detail>
+    <!--<own-list [pokemons]="catchedPokemons"></own-list>-->
   </div>
 </div>

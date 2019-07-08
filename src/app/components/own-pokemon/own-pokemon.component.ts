@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-//import { Location } from '@angular/common';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 
 import { IPokemon } from '../../model';
 import { PokemonsService } from '../../services/pokemons.service';
+import { NavigationService } from '../../services/navigation.service';
 
 @Component({
   selector: 'app-own-pokemon',
@@ -14,9 +14,8 @@ export class OwnPokemonComponent implements OnInit {
 
   pokemon: IPokemon;
 
-  constructor(private router: Router,
-              //private location: Location,
-              private pokemonsService: PokemonsService,
+  constructor(private pokemonsService: PokemonsService,
+              private navigationService: NavigationService,
               private activeRoute: ActivatedRoute) { }
 
   ngOnInit() {
@@ -26,8 +25,7 @@ export class OwnPokemonComponent implements OnInit {
   }
 
   goBackLink(): void {
-    //this.location.back();
-    this.router.navigate(['']);
+    this.navigationService.navigate(['']);
   }
 
 }

@@ -32,6 +32,9 @@ body, html {
 /* Main styles */
 body {
   font: 16px $font;
+  background: url('../assets/bg-main.jpg') no-repeat top right;
+  background-size: cover;
+  background-attachment: fixed;
 }
 
 .pokemon-wrap {

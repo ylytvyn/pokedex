@@ -3,7 +3,9 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { IPokemon } from '../../model';
 import { MessagesService } from '../../services/messages.service';
 import { PokemonsService } from '../../services/pokemons.service';
+import { OwnListService } from '../../services/own-list.service';
 import { ModalType } from '../../model';
+
 
 @Component({
   selector: 'pokemon-list',
@@ -12,15 +14,52 @@ import { ModalType } from '../../model';
 export class PokemonListComponent implements OnInit {
 
   pokemons: IPokemon[];
+  filteredPokemons: IPokemon[];
   selectedPokemon: IPokemon;
   catchedPokemons: IPokemon[] = [];
+  pokemonTypes: any = [];
 
   constructor(private _snackBar: MatSnackBar,
               private messagesService: MessagesService,
-              private pokemonsService: PokemonsService) { }
+              private pokemonsService: PokemonsService,
+              private ownListService: OwnListService) { }
 
   ngOnInit() {
     this.pokemons = this.pokemonsService.getPokemonsList();
+    this.filteredPokemons = this.pokemons;
+    this.ownListService.currentList.subscribe(list => this.catchedPokemons = list);
+    this.collectPokemonTypes();
+  }
+
+  collectPokemonTypes(): void {
+    this.pokemons.forEach((item: IPokemon) => {
+      let types = item.type;
+
+      types.forEach((i) => {
+        let item = this.pokemonTypes.find(x => x === i);
+
+        if (!item) {
+          this.pokemonTypes.push(i);
+        }
+      });
+
+    });
+  }
+
+  filterPokemonsByType(searchString: string): void {
+    let filteredByType = [];
+
+    this.pokemons.forEach((item: IPokemon) => {
+      item.type.forEach((type) => {
+        let findedType = this.pokemonTypes.find(x => x.toLowerCase() === searchString.toLowerCase());
+
+        if (findedType == type) {
+          filteredByType.push(item);
+        }
+      });
+    });
+
+    this.filteredPokemons = filteredByType;
   }
 
   // Show Details on click
@@ -53,6 +92,7 @@ export class PokemonListComponent implements OnInit {
       });
 
       this.catchedPokemons.push(pokemon);
+      this.ownListService.changePokemonList(this.catchedPokemons);
 
       this.pokemons.splice(this.pokemons.findIndex((i) => {
         return i.id === pokemon.id;

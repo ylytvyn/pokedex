@@ -1,5 +1,7 @@
+<button mat-button (click)="goBack()">Back to List</button>
+<h3 mat-subheader>My Catched Pokemons</h3>
+
 <mat-list *ngIf="pokemons">
-  <h3 mat-subheader>My Catched Pokemons</h3>
   <mat-list-item class="list__item"
                  *ngFor="let pokemon of pokemons"
                  routerLink="/pokemon/{{pokemon.id}}">
